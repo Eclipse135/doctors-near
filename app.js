@@ -30,6 +30,8 @@ app.configure('production', function(){
 // Routes
 
 app.get('/', routes.index);
+app.post('/ServiceSearch.aspx', routes.search);
+app.get('/Results.aspx', routes.results);
 
 var port = process.env.PORT || 3000;
 
