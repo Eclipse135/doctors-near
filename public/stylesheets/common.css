@@ -4,7 +4,12 @@ body {
 }
 
 a {
-  color: #00B7FF;
+  color: #0000FF;
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: underline;
 }
 
 .skip-link,
@@ -26,8 +31,15 @@ a {
 	display:none;
 }
 
+table, th, td{
+
+	border-collapse:collapse;
+	border: 1px solid #999;
+}
+
 .col-count-5 td {
     width: 20%;
+    padding: 4px;
 }
 
 td{
