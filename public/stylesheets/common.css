@@ -16,7 +16,20 @@ a {
 .additional,
 .auth-trusts,
 .help-finding,
-.footer
+.footer,
+.hidden,
+
+.fact-para,
+#filter-container,
+.scorecard-header
 {
 	display:none;
+}
+
+.col-count-5 td {
+    width: 20%;
+}
+
+td{
+	vertical-align: top;
 }
