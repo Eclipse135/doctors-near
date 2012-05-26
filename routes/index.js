@@ -1,4 +1,4 @@
-var http = require('http');
+var request = require('request');
 
 
 /*
@@ -6,20 +6,11 @@ var http = require('http');
  */
 
 exports.index = function(req, res){
-
-	var options = {
-	  host: 'www.nhs.uk',
-	  port: 80,
-	  path: '/servicedirectories/Pages/ServiceSearch.aspx'
-	};
-
-	http.get(options, function(res) {
-		
-		res.on('data', function (chunk) {
-			console.log('BODY: ' + chunk);
-		});
-	}).on('error', function(e) {
-	  console.log("Got error: " + e.message);
-	});
+	
+	request('http://www.nhs.uk/servicedirectories/Pages/ServiceSearch.aspx', function (error, response, body) {
+		if (!error && response.statusCode == 200) {
+			res.render('index', {'body':body});
+		}
+	})
 
 };
