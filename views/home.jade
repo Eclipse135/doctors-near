@@ -1,0 +1,33 @@
+script
+
+	function initiate_geolocation() {  
+		navigator.geolocation.getCurrentPosition(handle_geolocation_query);  
+	}  
+
+	function handle_geolocation_query(position){
+		console.log("handle_geolocation_query");
+		$.get("/api/geolocationToPostcode/"+position.coords.longitude+"/"+position.coords.latitude,
+			function(data){
+				$('#locationInput').val(data.postcode)
+				}
+			);
+	
+	}
+	
+	$(function(){
+		$('#useMyLocation').click(function(){initiate_geolocation()});
+	});
+
+form(action="ServiceSearch.aspx", method="POST", name="aspnetForm", id="aspnetForm")
+
+	.originalInputs!= inputs
+	
+	input(type="hidden", name="ctl00$PlaceHolderMain$MainContent$MainContent1$ucHubCoreServices$ucInput$btnSearch", value="Find")
+	input(type="hidden", name="ctl00$PlaceHolderMain$MainContent$MainContent1$SearchFilter", value="Hospital_Search")
+	input(type="hidden", name="ServiceType_Core", value="GP")
+	input(type="hidden", name="ServiceType_UrgentCare", value="AandE")
+	input(id="locationInput", name="ctl00$PlaceHolderMain$MainContent$MainContent1$ucHubCoreServices$ucInput$txtSearch", placeholder="town or postcode")
+
+	a(href="#", id="useMyLocation") Use my location
+	button(type="submit") Go
+	
