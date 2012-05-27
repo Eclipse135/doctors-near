@@ -1,6 +1,8 @@
 var  request = require('request'),
 	 url = require('url'),
-	 $ = require('jquery');
+	 $ = require('jquery'),
+	 jsdom = require('jsdom');
+
 
 
 exports.home = function(req, res){
@@ -69,10 +71,43 @@ exports.search = function(req, res){
 
 exports.results = function(req, res){
 
+	console.log("results");
+	
 	var url = 'http://www.nhs.uk/Scorecard/Pages'+req.url;
 	console.log("url: " + url);
+	/*
 	request(url, function (error, response, body) {
 		console.log("statusCode: " + response.statusCode);
+		
+		var body = $(body).find('body').html();
+		
+		var removals = $("img, script, link", body);
+		console.log(removals.length);
+		removals.remove();
 		res.render('index', {'body':body});
 	})
+	*/
+	
+	request({ uri: url }, function (error, response, body) {
+		if (error && response.statusCode !== 200) {
+			console.log('Error when contacting google.com')
+		}
+
+		jsdom.env({
+			html: body,
+			scripts: [
+			  'http://code.jquery.com/jquery-1.5.min.js'
+			]
+		}, function (err, window) {
+			var $ = window.jQuery;
+			
+			$("img, script, link").remove();
+			
+			var body = $('body').html();
+			
+			res.render('index', {'body':body});
+	});
+});
+
+	
 };
