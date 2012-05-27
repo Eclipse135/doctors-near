@@ -15,3 +15,13 @@ ul,li{
 	border: 1px solid #CCC;
 	box-shadow: 2px 2px 2px #CCC;
 }
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+
+	.doctor{
+		max-width: auto;
+		display:block;
+		margin: 20px 10px;
+	}
+
+}
