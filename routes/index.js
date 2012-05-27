@@ -89,6 +89,7 @@ exports.results = function(req, res){
 	*/
 	
 	request({ uri: url }, function (error, response, body) {
+
 		if (error && response.statusCode !== 200) {
 			console.log('Error when contacting google.com')
 		}
@@ -96,16 +97,49 @@ exports.results = function(req, res){
 		jsdom.env({
 			html: body,
 			scripts: [
-			  'http://code.jquery.com/jquery-1.5.min.js'
+			  'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'
 			]
 		}, function (err, window) {
 			var $ = window.jQuery;
+			
+			// get info
+			console.log("scraping...");
+			
+			var names = $('[headers*="gporganisationheader-0"]');
+			var addresses = $('[headers*="gpcoreaddress-1"]');
+			var GPs = $('.standard[headers*="gpgenderlanguage-6"]');
+			var feedbacks = $('.standard[headers*="gppatientfeedbackrecommend-8"]');
+			var satisfactions = $('.standard[headers*="satisfcationoverallcare-10"]');
+			var extendedAppointments = $('.standard[headers*="gpextendedappointments-15"]');
+			var patients = $('.standard[headers*="gp-registered-list-size-37"]');
+			
+			console.log("name: " + $(names[0]).text());
+			console.log("address: " + $(addresses[0]).text());
+			console.log("GPs: " + $(GPs[0]).text());
+			console.log("feedbacks: " + $(feedbacks[0]).text());
+			console.log("satisfactions: " + $(satisfactions[0]).text());
+			console.log("extendedAppointments: " + $(extendedAppointments[0]).text());
+			console.log("patients: " + $(patients[0]).text());
+			
+			var doctors = [];
+			
+			for(var i =0;i<5;i++){
+				doctors.push({
+					"name": $(names[i]).text(),
+					"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>"),
+					"GPs": $(GPs[i]).text().replace(/Data not available/, ""),
+					"feedback": $(feedbacks[i]).text().replace(/Read\/add comments about this practice/, ""),
+					"satisfaction": $(satisfactions[i]).text(),
+					"extendedAppointments": $(extendedAppointments[i]).text(),
+					"patients": $(patients[i]).text()
+				});
+			}
 			
 			$("img, script, link").remove();
 			
 			var body = $('body').html();
 			
-			res.render('results', {'body':body});
+			res.render('results', {'doctors':doctors});
 	});
 });
 

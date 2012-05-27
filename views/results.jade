@@ -2,4 +2,14 @@ link(rel='stylesheet', href='/stylesheets/results.css')
 
 a(href="/") &laquo; Search
 
-div!= body
+ul
+
+	- each doctor in doctors
+		li
+			h2= doctor.name
+			.row= doctor.feedback
+			.row!= doctor.address
+			.row= doctor.GPs
+			.row= doctor.satisfaction
+			.row= doctor.extendedAppointments
+			.row= doctor.patients
