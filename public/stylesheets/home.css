@@ -1,0 +1,30 @@
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+body{
+	text-align: center;
+	}
+
+body, input, button{
+	font-size: 16px;
+}
+
+input{
+	padding: 10px;
+	border: 1px solid #ccc;
+	width: 240px;
+}
+.row{
+	padding: 4px 0;
+}
+
+button{
+	background: #00F;
+	padding: 10px 20px;
+	border: 0;
+	color: #FFF;
+	width: 240px;
+}
+
+.actions{
+	margin: 10px 0;
+}

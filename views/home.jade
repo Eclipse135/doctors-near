@@ -1,3 +1,5 @@
+link(rel='stylesheet', href='/stylesheets/home.css')
+
 script
 
 	function initiate_geolocation() {  
@@ -30,8 +32,16 @@ form(action="ServiceSearch.aspx", method="POST", name="aspnetForm", id="aspnetFo
 	input(type="hidden", name="ctl00$PlaceHolderMain$MainContent$MainContent1$SearchFilter", value="Hospital_Search")
 	input(type="hidden", name="ServiceType_Core", value="GP")
 	input(type="hidden", name="ServiceType_UrgentCare", value="AandE")
-	input(id="locationInput", name="ctl00$PlaceHolderMain$MainContent$MainContent1$ucHubCoreServices$ucInput$txtSearch", placeholder="town or postcode")
+	
+	.row.location
+	
+		input(id="locationInput", name="ctl00$PlaceHolderMain$MainContent$MainContent1$ucHubCoreServices$ucInput$txtSearch", placeholder="town or postcode")
 
-	a(href="#", id="useMyLocation") Use my location
-	button(type="submit") Go
+	.row.useMyLocation
+
+		a(href="#", id="useMyLocation") Use my location
+	
+	.row.actions
+	
+		button(type="submit") Go
 	

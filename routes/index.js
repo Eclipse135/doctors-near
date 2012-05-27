@@ -105,7 +105,7 @@ exports.results = function(req, res){
 			
 			var body = $('body').html();
 			
-			res.render('index', {'body':body});
+			res.render('results', {'body':body});
 	});
 });
 
