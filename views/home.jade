@@ -11,12 +11,16 @@ script
 				$('#locationInput').val(data.postcode)
 				}
 			);
-	
 	}
 	
 	$(function(){
-		$('#useMyLocation').click(function(){initiate_geolocation()});
+		$('#useMyLocation').click(function(e){
+		e.preventDefault();
+			initiate_geolocation();
+		});
 	});
+	
+h1 Find a doctor
 
 form(action="ServiceSearch.aspx", method="POST", name="aspnetForm", id="aspnetForm")
 
