@@ -30,8 +30,7 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', routes.index);
-app.get('/home', routes.home);
+app.get('/', routes.home);
 app.get('/api/geolocationToPostcode/:long/:lat', routes.geolocationToPostcode);
 app.post('/ServiceSearch.aspx', routes.search);
 app.get('/Results.aspx', routes.results);

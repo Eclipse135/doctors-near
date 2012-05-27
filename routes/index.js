@@ -17,7 +17,6 @@ exports.home = function(req, res){
 		}
 	})
 	
-
 };
 
 exports.index = function(req, res){
