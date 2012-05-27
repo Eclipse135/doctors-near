@@ -3,6 +3,7 @@ link(rel='stylesheet', href='/stylesheets/home.css')
 script
 
 	function initiate_geolocation() {  
+		$('#locationInput').val("Looking for you...")
 		navigator.geolocation.getCurrentPosition(handle_geolocation_query);  
 	}  
 
