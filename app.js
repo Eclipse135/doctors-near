@@ -35,6 +35,7 @@ app.get('/', routes.home);
 app.get('/api/geolocationToPostcode/:long/:lat', routes.geolocationToPostcode);
 app.post('/ServiceSearch.aspx', routes.search);
 app.get('/Results.aspx', routes.results);
+app.get('/near/:postcode', routes.restResults);
 
 var port = process.env.PORT || 3000;
 
