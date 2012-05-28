@@ -225,8 +225,8 @@ exports.restResults = function(req, res){
 				});
 			});
 		} else {
-		
-			throw new Error('I didn\'t understand that location!');
+			console.log("ERROR: Location not found");
+			res.send(500);
 		}
 		
 	});

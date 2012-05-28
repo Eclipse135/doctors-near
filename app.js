@@ -38,6 +38,12 @@ app.get('/search', routes.search);
 app.get('/Results.aspx', routes.results);
 app.get('/:postcode', routes.restResults);
 
+app.error(function(err, req, res){
+  res.render('500', {
+     error: err
+  });
+});
+
 var port = process.env.PORT || 3000;
 
 app.listen(port, function(){
