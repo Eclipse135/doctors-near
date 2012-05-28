@@ -158,75 +158,76 @@ exports.restResults = function(req, res){
 
 	request({ uri: url}, function (error, response, body) {
 	
-		if(error){
-			throw new Error(error);
-		}
+		if (!error && response.statusCode == 200) {
 			
-		body = JSON.parse(body);
-		var easting = Math.round(body.easting/100),
-			northing = Math.round(body.northing/100);
-		console.log(easting);
-		console.log(northing);
+			body = JSON.parse(body);
+			var easting = Math.round(body.easting/100),
+				northing = Math.round(body.northing/100);
+			console.log(easting);
+			console.log(northing);
 		
-		url = "http://www.nhs.uk/Scorecard/Pages/Results.aspx?OrgType=1&TreatmentID=0&PageNumber=1&PageSize=0&TabId=31&SortType=1&LookupType=1&LocationType=1&SearchTerm=n44eb&DistanceFrom=5&SortByMetric=0&TrustCode=&TrustName=&DisambiguatedSearchTerm=&LookupTypeWasSwitched=False&MatchedOrganisationPostcode=&MatchedOrganisationCoords=&ServiceIDs=&ScorecardTypeCode=&NoneEnglishCountry=&HasMultipleNames=False&OriginalLookupType=1&ServiceLaunchFrom=&Filters=&TopLevelFilters=";
+			url = "http://www.nhs.uk/Scorecard/Pages/Results.aspx?OrgType=1&TreatmentID=0&PageNumber=1&PageSize=0&TabId=31&SortType=1&LookupType=1&LocationType=1&SearchTerm=n44eb&DistanceFrom=5&SortByMetric=0&TrustCode=&TrustName=&DisambiguatedSearchTerm=&LookupTypeWasSwitched=False&MatchedOrganisationPostcode=&MatchedOrganisationCoords=&ServiceIDs=&ScorecardTypeCode=&NoneEnglishCountry=&HasMultipleNames=False&OriginalLookupType=1&ServiceLaunchFrom=&Filters=&TopLevelFilters=";
 		
-		url += "&Coords="+northing +"%2c" + easting;
+			url += "&Coords="+northing +"%2c" + easting;
 		
-		request({ uri: url }, function (error, response, body) {
+			request({ uri: url }, function (error, response, body) {
 
-			if (error && response.statusCode !== 200) {
-				console.log('Error when contacting google.com')
-			}
-
-			jsdom.env({
-				html: body,
-				scripts: [
-				  'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'
-				]
-			}, function (err, window) {
-				var $ = window.jQuery;
-			
-				// get info
-				console.log("scraping...");
-			
-				var names = $('[headers*="gporganisationheader-0"]');
-				var addresses = $('[headers*="gpcoreaddress-1"]');
-				var GPs = $('.standard[headers*="gpgenderlanguage-6"]');
-				var feedbacks = $('.standard[headers*="gppatientfeedbackrecommend-8"]');
-				var satisfactions = $('.standard[headers*="satisfcationoverallcare-10"]');
-				var extendedAppointments = $('.standard[headers*="gpextendedappointments-15"]');
-				var patients = $('.standard[headers*="gp-registered-list-size-37"]');
-			
-				console.log("name: " + $(names[0]).text());
-				console.log("address: " + $(addresses[0]).text());
-				console.log("GPs: " + $(GPs[0]).text());
-				console.log("feedbacks: " + $(feedbacks[0]).text());
-				console.log("satisfactions: " + $(satisfactions[0]).text());
-				console.log("extendedAppointments: " + $(extendedAppointments[0]).text());
-				console.log("patients: " + $(patients[0]).text());
-			
-				var doctors = [];
-			
-				for(var i =0;i<names.length;i++){
-					doctors.push({
-						"name": $(names[i]).text(),
-						"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/([0-9 ]{6,20})/,"<a href=\"tel:$1\">$1</a>"),
-						"GPs": $(GPs[i]).text().replace(/Data not available/, ""),
-						"feedback": $(feedbacks[i]).text().replace(/Read\/add comments about this practice/, ""),
-						"satisfaction": $(satisfactions[i]).text(),
-						"extendedAppointments": $(extendedAppointments[i]).text(),
-						"patients": $(patients[i]).text()
-					});
+				if (error && response.statusCode !== 200) {
+					console.log('Error when contacting google.com')
 				}
+
+				jsdom.env({
+					html: body,
+					scripts: [
+					  'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'
+					]
+				}, function (err, window) {
+					var $ = window.jQuery;
 			
-				$("img, script, link").remove();
+					// get info
+					console.log("scraping...");
 			
-				var body = $('body').html();
+					var names = $('[headers*="gporganisationheader-0"]');
+					var addresses = $('[headers*="gpcoreaddress-1"]');
+					var GPs = $('.standard[headers*="gpgenderlanguage-6"]');
+					var feedbacks = $('.standard[headers*="gppatientfeedbackrecommend-8"]');
+					var satisfactions = $('.standard[headers*="satisfcationoverallcare-10"]');
+					var extendedAppointments = $('.standard[headers*="gpextendedappointments-15"]');
+					var patients = $('.standard[headers*="gp-registered-list-size-37"]');
 			
-				res.render('results', {'doctors':doctors});
+					console.log("name: " + $(names[0]).text());
+					console.log("address: " + $(addresses[0]).text());
+					console.log("GPs: " + $(GPs[0]).text());
+					console.log("feedbacks: " + $(feedbacks[0]).text());
+					console.log("satisfactions: " + $(satisfactions[0]).text());
+					console.log("extendedAppointments: " + $(extendedAppointments[0]).text());
+					console.log("patients: " + $(patients[0]).text());
+			
+					var doctors = [];
+			
+					for(var i =0;i<names.length;i++){
+						doctors.push({
+							"name": $(names[i]).text(),
+							"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/([0-9 ]{6,20})/,"<a href=\"tel:$1\">$1</a>"),
+							"GPs": $(GPs[i]).text().replace(/Data not available/, ""),
+							"feedback": $(feedbacks[i]).text().replace(/Read\/add comments about this practice/, ""),
+							"satisfaction": $(satisfactions[i]).text(),
+							"extendedAppointments": $(extendedAppointments[i]).text(),
+							"patients": $(patients[i]).text()
+						});
+					}
+			
+					$("img, script, link").remove();
+			
+					var body = $('body').html();
+			
+					res.render('results', {'doctors':doctors});
+				});
 			});
-		});
-	
+		} else {
+		
+			throw new Error('I didn\'t understand that location!');
+		}
 		
 	});
 };
