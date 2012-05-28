@@ -18,10 +18,23 @@ ul,li{
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
 
+	body{
+		padding: 0;
+		margin: 0;
+	}
+	
+	.back{
+		padding: 20px;
+	}
+
 	.doctor{
-		max-width: auto;
+		margin: 0;
+		max-width: none;
+		box-shadow: none;
 		display:block;
-		margin: 20px 10px;
+		padding: 5px 20px 20px 20px;
+		border: none;
+		border-top: 1px solid #ccc;
 	}
 
 }
