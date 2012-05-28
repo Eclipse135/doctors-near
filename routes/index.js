@@ -12,6 +12,13 @@ exports.home = function(req, res){
 	
 };
 
+exports.about = function(req, res){
+
+	console.log("about");
+	res.render('about');
+	
+};
+
 exports.index = function(req, res){
 	
 	request('http://www.nhs.uk/servicedirectories/Pages/ServiceSearch.aspx', function (error, response, body) {
@@ -221,7 +228,7 @@ exports.restResults = function(req, res){
 			
 					var body = $('body').html();
 			
-					res.render('results', {'doctors':doctors});
+					res.render('results', {'location':postcode, 'doctors':doctors});
 				});
 			});
 		} else {

@@ -12,36 +12,27 @@ a:hover{
   text-decoration: underline;
 }
 
-.skip-link,
-.info-nav,
-.tab-login,
-.header,
-.hub-mod,
-.hub-box .link-list,
-.additional,
-.auth-trusts,
-.help-finding,
-.footer,
-.hidden,
+h1{
+	font-weight: normal;
+		color: #999;
+	}
 
-.fact-para,
-#filter-container,
-.scorecard-header
-{
-	display:none;
+.mainFooter{
+	font-size: 12px;
+	color: #666;
+	margin-top: 60px;
 }
 
-table, th, td{
-
-	border-collapse:collapse;
-	border: 1px solid #999;
+.mainFooter .more{
 }
 
-.col-count-5 td {
-    width: 20%;
-    padding: 4px;
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+
+	h1{
+		padding: 0 20px;
+		margin: 0 0 10px 0;
+	}
+
 }
 
-td{
-	vertical-align: top;
-}

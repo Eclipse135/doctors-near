@@ -4,7 +4,14 @@ html
 	head
 		script(src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js")
 		link(rel='stylesheet', href='/stylesheets/common.css')
-	body!= body
+		title Doctors Near You
+		
+	body
+	
+		#main!= body
+		
+		footer.mainFooter
+			a(href="/about") site by Joe Lanman
 
 	script(type="text/javascript")
 
