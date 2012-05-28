@@ -33,7 +33,8 @@ app.configure('production', function(){
 
 app.get('/', routes.home);
 app.get('/api/geolocationToPostcode/:long/:lat', routes.geolocationToPostcode);
-app.post('/ServiceSearch.aspx', routes.search);
+app.post('/ServiceSearch.aspx', routes.oldSearch);
+app.get('/search', routes.search);
 app.get('/Results.aspx', routes.results);
 app.get('/near/:postcode', routes.restResults);
 

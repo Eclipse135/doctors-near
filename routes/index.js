@@ -53,6 +53,14 @@ exports.search = function(req, res){
 	
 	console.log("search");
 	
+	res.redirect("/near/"+req.param("location"));
+
+};
+
+exports.oldSearch = function(req, res){
+	
+	console.log("search");
+	
 	var requestObj = {method: "POST",
 					  url:'http://www.nhs.uk/servicedirectories/Pages/ServiceSearch.aspx',
 					  form: req.body,

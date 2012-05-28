@@ -25,18 +25,11 @@ script
 	
 h1 Find a doctor
 
-form(action="ServiceSearch.aspx", method="POST", name="aspnetForm", id="aspnetForm")
-
-	.originalInputs!= inputs
-	
-	input(type="hidden", name="ctl00$PlaceHolderMain$MainContent$MainContent1$ucHubCoreServices$ucInput$btnSearch", value="Find")
-	input(type="hidden", name="ctl00$PlaceHolderMain$MainContent$MainContent1$SearchFilter", value="Hospital_Search")
-	input(type="hidden", name="ServiceType_Core", value="GP")
-	input(type="hidden", name="ServiceType_UrgentCare", value="AandE")
+form(action="search", method="GET", name="aspnetForm", id="aspnetForm")
 	
 	.row.location
 	
-		input(id="locationInput", name="ctl00$PlaceHolderMain$MainContent$MainContent1$ucHubCoreServices$ucInput$txtSearch", placeholder="town or postcode")
+		input(id="locationInput", name="location", placeholder="town or postcode")
 
 	.row.useMyLocation
 
