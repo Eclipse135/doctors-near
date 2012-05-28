@@ -132,7 +132,7 @@ exports.results = function(req, res){
 			for(var i =0;i<names.length;i++){
 				doctors.push({
 					"name": $(names[i]).text(),
-					"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/([0-9 ]{6,20})/,"<a href=\"tel:$1\">$1</a>"),
+					"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/([0-9 -]{6,20})/,"<a href=\"tel:$1\">$1</a>"),
 					"GPs": $(GPs[i]).text().replace(/Data not available/, ""),
 					"feedback": $(feedbacks[i]).text().replace(/Read\/add comments about this practice/, ""),
 					"satisfaction": $(satisfactions[i]).text(),
@@ -215,7 +215,7 @@ exports.restResults = function(req, res){
 					for(var i =0;i<names.length;i++){
 						doctors.push({
 							"name": $(names[i]).text(),
-							"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/([0-9 ]{8,20})/,"<a href=\"tel:$1\">$1</a>"),
+							"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/(\+?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d?[ -]?\d?[ -]?\d)/,"<a href=\"tel:$1\">$1</a>"),
 							"GPs": $(GPs[i]).text().replace(/Data not available/, ""),
 							"feedback": $(feedbacks[i]).text().replace(/Read\/add comments about this practice/, ""),
 							"satisfaction": $(satisfactions[i]).text(),
