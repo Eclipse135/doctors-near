@@ -8,16 +8,7 @@ var  request = require('request'),
 exports.home = function(req, res){
 
 	console.log("home");
-
-	request('http://www.nhs.uk/servicedirectories/Pages/ServiceSearch.aspx', function (error, response, body) {
-		if (!error && response.statusCode == 200) {
-			var $inputs = $("#aspnetForm input[type=hidden], #aspnetForm input[type=Hidden]", body);
-			console.log($inputs.length);
-			var $inputWrap = $('<div/>').append($inputs);
-			var inputHTML = $inputWrap.html();
-			res.render('home', {'inputs':inputHTML});
-		}
-	})
+	res.render('home');
 	
 };
 
@@ -53,7 +44,7 @@ exports.search = function(req, res){
 	
 	console.log("search");
 	
-	res.redirect("/near/"+req.param("location"));
+	res.redirect("/"+req.param("location"));
 
 };
 
