@@ -149,9 +149,19 @@ exports.restResults = function(req, res){
 
 	var postcode = req.params.postcode,
 		url = "http://mapit.mysociety.org/postcode/"+ postcode.replace(/\s/,"");
+		
+	if(!postcode){
+		throw new Error('Postcode is missing!');
+	}
+	
 	console.log(postcode);
 
 	request({ uri: url}, function (error, response, body) {
+	
+		if(error){
+			throw new Error(error);
+		}
+			
 		body = JSON.parse(body);
 		var easting = Math.round(body.easting/100),
 			northing = Math.round(body.northing/100);
