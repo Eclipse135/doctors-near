@@ -151,6 +151,17 @@ exports.results = function(req, res){
 
 };
 
+exports.browse = function(req, res){
+
+	if(req.param('region')){
+		res.render('countries/' + req.param('country') + "/"+req.param('region'));
+	} else if (req.param('country')){
+		res.render('countries/' + req.param('country'));
+	} else {
+		res.render('countries');
+	}
+
+}
 
 exports.restResults = function(req, res){
 
