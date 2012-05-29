@@ -31,6 +31,10 @@ app.configure('production', function(){
 
 // Routes
 
+app.get('/robots.txt', function(req, res){
+	res.send("User-agent: * \nDisallow:");
+});
+
 app.get('/', routes.home);
 app.get('/about', routes.about);
 app.get('/api/geolocationToPostcode/:long/:lat', routes.geolocationToPostcode);
