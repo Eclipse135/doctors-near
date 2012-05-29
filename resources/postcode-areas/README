@@ -1,0 +1,75 @@
+DG POSTCODE TOWN & COUNTIES DATABASE
+===========================
+The `DG POSTCODE TOWN & COUNTIES DATABASE` is a free to use, modify and distribute
+data set containing data that associates postal "out codes" to towns, counties
+and countries. It also contains eastings, northings, latitude and longitude
+information.
+
+Provided database formats (as of 0.5) include CSV, ODS, SQLite, MySQL, JSON and XML.
+
+CHANGES
+======
+
+05/10/11
+--------------
+This update adds country ISO 3166-2:GB codes as well as country strings (names).
+Also contains a few minor fixes and accuracy improvements.
+
+Note: Guernsey, Jersey and the Isle of Mann use Alpha 2 codes from ISO 3166-1.
+
+10/06/11
+--------------
+This update improves the accuracy of data within the existing database prior 
+to plans of releasing a new database based on the governments Code Point 
+Open dataset.
+
+The data contained in this update is quite a drastic change in the fact that 
+some towns are very specific (for example “Aberdeen Airport”) due to longitude 
+and latitude being used to determine the address as opposed to the actual 
+postcode itself. 
+
+I decided to go down this route as some postcodes cover more than one major 
+area. For this reason the county column will always be more accurate then the 
+“town”. The next planned database uses fully formed postcodes so this won't 
+be an issue.
+
+*-  Latitude and Longitude has a higher precision to 5 decimal places
+*-  Counties are more specific based on postal addresses and less ceremonial. For 
+example “Aberdeenshire” might now have the county “Aberdeen City” depending 
+on the location.
+*- Includes some tools
+*- Now includes an SQLite database (SL3)
+
+08/10/10
+--------------
+This update contains 27 additional postcode entries thanks to Dennis Milns. 
+The new entries are CB21-CB25, GY1-GY9, IM1-IM9, JE1-JE5. I've also included 
+the Northing and Easting for these postcodes. Thanks Dennis!
+	
+*- Removed some odd spaces ' ' appearing for some county and town names
+	
+
+14/05/10
+--------------
+This update corrects mistakes, fixes the incorrect longitude/latitude problems 
+and improves the resolution of counties. For example Birmingham now has 
+the county "West Midlands" and not "Birmingham".
+	
+*- Corrected the Longitude/Latitude columns in the SQL file. The values were 
+correct but the data type wasn't (doh)
+*- Improved the duplicate "town/county" issue.
+
+
+LEGAL
+----------
+This is free: you can redistribute it and/or modify it as you see fit.
+
+This is distributed in the hope that it will be useful, but WITHOUT ANY 
+WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License 
+for more details.
+
+Regards,
+
+Daniel Gibbs <contact@danielgibbs.net>
+http://www.dangibbs.co.uk/journal/free-uk-postcode-towns-counties-database
