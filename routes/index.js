@@ -153,24 +153,30 @@ exports.results = function(req, res){
 
 exports.browse = function(req, res){
 
-	if(req.param('region')){
-		res.render('countries/' + req.param('country') + "/"+req.param('region'));
-	} else if (req.param('country')){
-		res.render('countries/' + req.param('country'));
+	if(req.param('location')){
+		res.render('locations/' + req.param('location'));
 	} else {
-		res.render('countries');
+		res.render('browse');
 	}
 
 }
 
 exports.restResults = function(req, res){
 
-	var postcode = req.params.postcode,
-		url = "http://mapit.mysociety.org/postcode/"+ postcode.replace(/\s/,"");
-		
+	var postcode = req.params.postcode;
+	
 	if(!postcode){
 		throw new Error('Postcode is missing!');
 	}
+	
+	if(postcode.indexOf(" ")!=-1){
+		res.redirect("/"+postcode.replace(/\s+/g,"-"));
+		return;
+	}
+	
+	var postcode = postcode.replace(/\-+/g," "),
+		url = "http://mapit.mysociety.org/postcode/"+ postcode.replace(/\s+/g,"");
+		
 	
 	console.log(postcode);
 

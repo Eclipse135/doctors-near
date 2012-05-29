@@ -6,53 +6,56 @@ var writeViews = function(countries){
 
 	console.log("writing views ...");
 	
-	var stream = fs.createWriteStream("views/countries.jade");
+	var stream = fs.createWriteStream("views/browse.jade");
 	
+	stream.write("meta(name=\"robots\",content=\"NOINDEX\")\n");
 	stream.write("ul.locations\n");
 	
 	for(country in countries){
-	
-		stream.write("  li\n");
-		stream.write("    a(href=\"/browse/" + country + "\") " + country + "\n");
-		
-		var countryStream = fs.createWriteStream("views/countries/"+country+".jade");
-		countryStream.write("ul.locations\n");
-		
+			
 		for (region in countries[country]){
 		
 			console.log("region: " + region);
-			countryStream.write("  li\n");
-			countryStream.write("    a(href=\"/browse/" + country + "/"+ region + "\") " + region + "\n");
+			stream.write("  li\n");
+			stream.write("    a(href=\"/browse/" + region + "\") " + region + "\n");
 			
-			var regionStream = fs.createWriteStream("views/countries/"+country+"/"+ region + ".jade");
+			var regionStream = fs.createWriteStream("views/locations/"+ region + ".jade");
+			regionStream.write("meta(name=\"robots\",content=\"NOINDEX\")\n");
 			regionStream.write("ul.locations\n");
 			
 			for (postcodeArea in countries[country][region]){
 			
 				console.log("postcodeArea: " + postcodeArea);
 				regionStream.write("  li\n");
-				regionStream.write("    a(href=\"/browse/" + country + "/"+ postcodeArea + "\") " + postcodeArea + "\n");
+				regionStream.write("    a(href=\"/browse/"+ postcodeArea + "\") " + postcodeArea + "\n");
 			
-				var postcodeAreaStream = fs.createWriteStream("views/countries/"+country+"/"+ postcodeArea + ".jade");
+				var postcodeView = "";
 				
-				postcodeAreaStream.write("ul.locations\n");
+				postcodeView += "meta(name=\"robots\",content=\"NOINDEX\")\n";
+				postcodeView += "ul.locations\n";
 			
 				var postcodes = countries[country][region][postcodeArea];
+				
 				if (postcodes){
 				
 					console.log("postcodes: " + postcodes.length);
 					for (var i = 0; i < postcodes.length; i++){
 						var postcode = postcodes[i];
-						postcodeAreaStream.write("  li\n");
-						postcodeAreaStream.write("    a(href=\"/" + postcode + "\") " + postcode + "\n");
+						postcodeView += "  li\n";
+						postcodeView +="    a(href=\"/" + postcode.replace(/^\s+|\s+$/,"").replace(/\s+/g,"-") + "\") Doctors near " + postcode + "\n";
 				
 					}
 				}
+				fs.writeFileSync("views/locations/"+ postcodeArea + ".jade", postcodeView);
 							
 			}
 			
+			regionStream.end();
+			
 		}
+		
 	}
+	stream.end();
 };
 
 var countries = {};
