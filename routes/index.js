@@ -75,82 +75,6 @@ exports.oldSearch = function(req, res){
 
 };
 
-exports.results = function(req, res){
-
-	console.log("results");
-	
-	var url = 'http://www.nhs.uk/Scorecard/Pages'+req.url;
-	console.log("url: " + url);
-	/*
-	request(url, function (error, response, body) {
-		console.log("statusCode: " + response.statusCode);
-		
-		var body = $(body).find('body').html();
-		
-		var removals = $("img, script, link", body);
-		console.log(removals.length);
-		removals.remove();
-		res.render('index', {'body':body});
-	})
-	*/
-	
-	request({ uri: url }, function (error, response, body) {
-
-		if (error && response.statusCode !== 200) {
-			console.log('Error when contacting google.com')
-		}
-
-		jsdom.env({
-			html: body,
-			scripts: [
-			  'http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'
-			]
-		}, function (err, window) {
-			var $ = window.jQuery;
-			
-			// get info
-			console.log("scraping...");
-			
-			var names = $('[headers*="gporganisationheader-0"]');
-			var addresses = $('[headers*="gpcoreaddress-1"]');
-			var GPs = $('.standard[headers*="gpgenderlanguage-6"]');
-			var feedbacks = $('.standard[headers*="gppatientfeedbackrecommend-8"]');
-			var satisfactions = $('.standard[headers*="satisfcationoverallcare-10"]');
-			var extendedAppointments = $('.standard[headers*="gpextendedappointments-15"]');
-			var patients = $('.standard[headers*="gp-registered-list-size-37"]');
-			
-			console.log("name: " + $(names[0]).text());
-			console.log("address: " + $(addresses[0]).text());
-			console.log("GPs: " + $(GPs[0]).text());
-			console.log("feedbacks: " + $(feedbacks[0]).text());
-			console.log("satisfactions: " + $(satisfactions[0]).text());
-			console.log("extendedAppointments: " + $(extendedAppointments[0]).text());
-			console.log("patients: " + $(patients[0]).text());
-			
-			var doctors = [];
-			
-			for(var i =0;i<names.length;i++){
-				doctors.push({
-					"name": $(names[i]).text(),
-					"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/([0-9 -]{6,20})/,"<a href=\"tel:$1\">$1</a>"),
-					"GPs": $(GPs[i]).text().replace(/Data not available/, ""),
-					"feedback": $(feedbacks[i]).text().replace(/Read\/add comments about this practice/, ""),
-					"satisfaction": $(satisfactions[i]).text(),
-					"extendedAppointments": $(extendedAppointments[i]).text(),
-					"patients": $(patients[i]).text()
-				});
-			}
-			
-			$("img, script, link").remove();
-			
-			var body = $('body').html();
-			
-			res.render('results', {'doctors':doctors});
-		});
-	});
-
-};
-
 exports.browse = function(req, res){
 
 	if(req.param('location')){
@@ -164,6 +88,8 @@ exports.browse = function(req, res){
 exports.restResults = function(req, res){
 
 	var postcode = req.params.postcode;
+	
+	console.log("results for " + postcode);
 	
 	if(!postcode){
 		throw new Error('Postcode is missing!');
@@ -180,7 +106,7 @@ exports.restResults = function(req, res){
 	
 	console.log(postcode);
 
-	request({ uri: url}, function (error, response, body) {
+	request({ uri: url, timeout:10000}, function (error, response, body) {
 	
 		if (!error && response.statusCode == 200) {
 			
@@ -194,7 +120,7 @@ exports.restResults = function(req, res){
 		
 			url += "&Coords="+northing +"%2c" + easting;
 		
-			request({ uri: url }, function (error, response, body) {
+			request({ uri: url, timeout:10000 }, function (error, response, body) {
 
 				if (error && response.statusCode !== 200) {
 					console.log('Error when contacting google.com')
@@ -240,11 +166,7 @@ exports.restResults = function(req, res){
 							"patients": $(patients[i]).text()
 						});
 					}
-			
-					$("img, script, link").remove();
-			
-					var body = $('body').html();
-			
+						
 					res.render('results', {'location':postcode, 'doctors':doctors});
 				});
 			});

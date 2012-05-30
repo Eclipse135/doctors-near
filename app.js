@@ -41,7 +41,6 @@ app.get('/api/geolocationToPostcode/:long/:lat', routes.geolocationToPostcode);
 app.get('/browse', routes.browse);
 app.get('/browse/:location', routes.browse);
 app.get('/search', routes.search);
-app.get('/Results.aspx', routes.results);
 app.get('/:postcode', routes.restResults);
 
 app.error(function(err, req, res){
