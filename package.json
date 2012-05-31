@@ -1,9 +1,9 @@
 {
     "name": "nhs-choices-repsonsive"
   , "version": "0.0.1"
-  "engines": {
-    "node": ">=0.6.18"
-   }
+  , "engines": {
+      "node": ">=0.6.18"
+    }
   , "private": true
   , "dependencies": {
       "express": ">=2.5.8"
