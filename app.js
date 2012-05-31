@@ -6,7 +6,7 @@
 var express = require('express')
   , routes = require('./routes');
 
-var app = module.exports = express.createServer();
+var app = express.createServer();
 
 // Configuration
 
@@ -16,9 +16,9 @@ app.configure(function(){
   app.set('view options', { pretty: true });
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(app.router);
   app.use(express.static(__dirname + '/public'));
-
+  app.use(express.favicon(__dirname+'/public/images/favicon.ico'));
+  app.use(app.router);
 });
 
 app.configure('development', function(){
@@ -31,10 +31,6 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/robots.txt', function(req, res){
-	res.send("User-agent: * \nDisallow:");
-});
-
 app.get('/', routes.home);
 app.get('/about', routes.about);
 app.get('/api/geolocationToPostcode/:long/:lat', routes.geolocationToPostcode);
@@ -42,12 +38,6 @@ app.get('/browse', routes.browse);
 app.get('/browse/:location', routes.browse);
 app.get('/search', routes.search);
 app.get('/:postcode', routes.restResults);
-
-app.error(function(err, req, res){
-  res.render('500', {
-     error: err
-  });
-});
 
 var port = process.env.PORT || 3000;
 

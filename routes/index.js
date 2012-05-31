@@ -1,8 +1,8 @@
 var  request = require('request'),
 	 url = require('url'),
 	 $ = require('jquery'),
-	 jsdom = require('jsdom');
-
+	 jsdom = require('jsdom'),
+	 util = require('util');
 
 
 exports.home = function(req, res){
@@ -17,16 +17,6 @@ exports.about = function(req, res){
 	console.log("about");
 	res.render('about');
 	
-};
-
-exports.index = function(req, res){
-	
-	request('http://www.nhs.uk/servicedirectories/Pages/ServiceSearch.aspx', function (error, response, body) {
-		if (!error && response.statusCode == 200) {
-			res.render('index', {'body':body});
-		}
-	})
-
 };
 
 exports.geolocationToPostcode = function(req, res){
@@ -55,35 +45,21 @@ exports.search = function(req, res){
 
 };
 
-exports.oldSearch = function(req, res){
-	
-	console.log("search");
-	
-	var requestObj = {method: "POST",
-					  url:'http://www.nhs.uk/servicedirectories/Pages/ServiceSearch.aspx',
-					  form: req.body,
-					  followRedirect: false};
-	request(requestObj, function (error, response, body) {
-		console.log("statusCode: " + response.statusCode);
-			if (!error && response.statusCode == 302) {
-				console.log("Location: " + response.headers.location);
-				res.redirect(response.headers.location.replace("/Scorecard/Pages",""));
-			} else {
-				res.render('index', {'body':body});
-			}
-		})
-
-};
-
 exports.browse = function(req, res){
 
-	if(req.param('location')){
-		res.render('locations/' + req.param('location'));
+	console.log("browse");
+	
+	var location = req.param('location');	
+	if(location){
+		console.log("location: " + location);
+		res.render('locations/' + location);
 	} else {
 		res.render('browse');
 	}
+	
+	console.log(util.inspect(process.memoryUsage()));
 
-}
+};
 
 exports.restResults = function(req, res){
 
@@ -103,7 +79,6 @@ exports.restResults = function(req, res){
 	var postcode = postcode.replace(/\-+/g," "),
 		url = "http://mapit.mysociety.org/postcode/"+ postcode.replace(/\s+/g,"");
 		
-	
 	console.log(postcode);
 
 	request({ uri: url, timeout:10000}, function (error, response, body) {
@@ -117,13 +92,14 @@ exports.restResults = function(req, res){
 			console.log(northing);
 		
 			url = "http://www.nhs.uk/Scorecard/Pages/Results.aspx?OrgType=1&TreatmentID=0&PageNumber=1&PageSize=0&TabId=31&SortType=1&LookupType=1&LocationType=1&SearchTerm=n44eb&DistanceFrom=5&SortByMetric=0&TrustCode=&TrustName=&DisambiguatedSearchTerm=&LookupTypeWasSwitched=False&MatchedOrganisationPostcode=&MatchedOrganisationCoords=&ServiceIDs=&ScorecardTypeCode=&NoneEnglishCountry=&HasMultipleNames=False&OriginalLookupType=1&ServiceLaunchFrom=&Filters=&TopLevelFilters=";
-		
 			url += "&Coords="+northing +"%2c" + easting;
 		
 			request({ uri: url, timeout:10000 }, function (error, response, body) {
 
-				if (error && response.statusCode !== 200) {
-					console.log('Error when contacting google.com')
+				if (error || response.statusCode !== 200) {
+					console.log('Error:' + error);
+					res.send(500);
+					return;
 				}
 
 				jsdom.env({
@@ -137,25 +113,17 @@ exports.restResults = function(req, res){
 					// get info
 					console.log("scraping...");
 			
-					var names = $('[headers*="gporganisationheader-0"]');
-					var addresses = $('[headers*="gpcoreaddress-1"]');
-					var GPs = $('.standard[headers*="gpgenderlanguage-6"]');
-					var feedbacks = $('.standard[headers*="gppatientfeedbackrecommend-8"]');
-					var satisfactions = $('.standard[headers*="satisfcationoverallcare-10"]');
-					var extendedAppointments = $('.standard[headers*="gpextendedappointments-15"]');
-					var patients = $('.standard[headers*="gp-registered-list-size-37"]');
-			
-					console.log("name: " + $(names[0]).text());
-					console.log("address: " + $(addresses[0]).text());
-					console.log("GPs: " + $(GPs[0]).text());
-					console.log("feedbacks: " + $(feedbacks[0]).text());
-					console.log("satisfactions: " + $(satisfactions[0]).text());
-					console.log("extendedAppointments: " + $(extendedAppointments[0]).text());
-					console.log("patients: " + $(patients[0]).text());
-			
+					var names = $('[headers*="gporganisationheader-0"]'),
+						addresses = $('[headers*="gpcoreaddress-1"]'),
+						GPs = $('.standard[headers*="gpgenderlanguage-6"]'),
+						feedbacks = $('.standard[headers*="gppatientfeedbackrecommend-8"]'),
+						satisfactions = $('.standard[headers*="satisfcationoverallcare-10"]'),
+						extendedAppointments = $('.standard[headers*="gpextendedappointments-15"]'),
+						patients = $('.standard[headers*="gp-registered-list-size-37"]');
+						
 					var doctors = [];
 			
-					for(var i =0;i<names.length;i++){
+					for(var i = 0; i<names.length; i++){
 						doctors.push({
 							"name": $(names[i]).text(),
 							"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/(\+?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d?[ -]?\d?[ -]?\d)/g,"<a href=\"tel:$1\">$1</a>"),
@@ -170,10 +138,15 @@ exports.restResults = function(req, res){
 					res.render('results', {'location':postcode, 'doctors':doctors});
 				});
 			});
+			
 		} else {
+		
 			console.log("ERROR: Location not found");
 			res.send(500);
+			
 		}
+		
+		console.log(util.inspect(process.memoryUsage()));
 		
 	});
 };
