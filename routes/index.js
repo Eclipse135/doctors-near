@@ -166,7 +166,7 @@ exports.restResults = function(req, res){
 							"patients": $(patients[i]).text()
 						});
 					}
-						
+					window.close();
 					res.render('results', {'location':postcode, 'doctors':doctors});
 				});
 			});
