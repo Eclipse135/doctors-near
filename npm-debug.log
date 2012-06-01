@@ -1,0 +1,402 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/local/bin/npm', 'install' ]
+info using npm@1.0.104
+info using node@v0.4.13-pre
+verbose config file /home/reed/.npmrc
+verbose config file /usr/local/etc/npmrc
+verbose config file /usr/local/lib/node_modules/npm/npmrc
+silly testEngine { name: 'nhs-choices-repsonsive',
+silly testEngine   version: '0.0.1',
+silly testEngine   engines: { node: '>=0.6.18' },
+silly testEngine   private: true,
+silly testEngine   dependencies: 
+silly testEngine    { express: '>=2.5.8',
+silly testEngine      jade: '>= 0.0.1',
+silly testEngine      request: '>=0.9.0',
+silly testEngine      jquery: '>=1.7.0',
+silly testEngine      jsdom: '>=0.2.0',
+silly testEngine      markdown: '>=0.3.0' },
+silly testEngine   _id: 'nhs-choices-repsonsive@0.0.1',
+silly testEngine   devDependencies: {},
+silly testEngine   _engineSupported: false,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   scripts: {} }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/package.json
+verbose loadDefaults nhs-choices-repsonsive@0.0.1
+verbose where, deps [ '/home/reed/Dropbox/projects/nhs-responsive',
+verbose where, deps   [ 'express',
+verbose where, deps     'jade',
+verbose where, deps     'request',
+verbose where, deps     'jquery',
+verbose where, deps     'jsdom',
+verbose where, deps     'markdown' ] ]
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/package.json
+info preinstall nhs-choices-repsonsive@0.0.1
+silly testEngine { name: 'jquery',
+silly testEngine   description: 'jQuery: The Write Less, Do More, JavaScript Library (packaged for Node.JS)',
+silly testEngine   url: 'http://jquery.com',
+silly testEngine   keywords: [ 'util', 'dom', 'jquery' ],
+silly testEngine   author: { name: 'John Resig', email: 'jeresig@gmail.com' },
+silly testEngine   contributors: [],
+silly testEngine   dependencies: { jsdom: '>=0.2.0', htmlparser: '>= 1.7.3' },
+silly testEngine   lib: '.',
+silly testEngine   main: './node-jquery.js',
+silly testEngine   version: '1.6.3',
+silly testEngine   _id: 'jquery@1.6.3',
+silly testEngine   devDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/node_modules/jquery/package.json
+verbose loadDefaults jquery@1.6.3
+silly testEngine { name: 'express',
+silly testEngine   description: 'Sinatra inspired web development framework',
+silly testEngine   version: '2.5.9',
+silly testEngine   author: 
+silly testEngine    { name: 'TJ Holowaychuk',
+silly testEngine      email: 'tj@vision-media.ca' },
+silly testEngine   contributors: 
+silly testEngine    [ { name: 'TJ Holowaychuk',
+silly testEngine        email: 'tj@vision-media.ca' },
+silly testEngine      { name: 'Aaron Heckmann',
+silly testEngine        email: 'aaron.heckmann+github@gmail.com' },
+silly testEngine      { name: 'Ciaran Jessup', email: 'ciaranj@gmail.com' },
+silly testEngine      { name: 'Guillermo Rauch', email: 'rauchg@gmail.com' } ],
+silly testEngine   dependencies: 
+silly testEngine    { connect: '1.x',
+silly testEngine      mime: '1.2.4',
+silly testEngine      qs: '0.4.x',
+silly testEngine      mkdirp: '0.3.0' },
+silly testEngine   devDependencies: 
+silly testEngine    { 'connect-form': '0.2.1',
+silly testEngine      ejs: '0.4.2',
+silly testEngine      expresso: '0.9.2',
+silly testEngine      hamljs: '0.6.x',
+silly testEngine      jade: '0.16.2',
+silly testEngine      stylus: '0.13.0',
+silly testEngine      should: '0.3.2',
+silly testEngine      'express-messages': '0.0.2',
+silly testEngine      'node-markdown': '>= 0.0.1',
+silly testEngine      'connect-redis': '>= 0.0.1' },
+silly testEngine   keywords: [ 'framework', 'sinatra', 'web', 'rest', 'restful' ],
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/visionmedia/express.git' },
+silly testEngine   main: 'index',
+silly testEngine   bin: { express: './bin/express' },
+silly testEngine   scripts: { test: 'make test', prepublish: 'npm prune' },
+silly testEngine   engines: { node: '>= 0.4.1 < 0.7.0' },
+silly testEngine   _id: 'express@2.5.9',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/node_modules/express/package.json
+verbose loadDefaults express@2.5.9
+silly testEngine { name: 'jade',
+silly testEngine   description: 'Jade template engine',
+silly testEngine   version: '0.26.1',
+silly testEngine   author: 
+silly testEngine    { name: 'TJ Holowaychuk',
+silly testEngine      email: 'tj@vision-media.ca' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/visionmedia/jade.git' },
+silly testEngine   main: './index.js',
+silly testEngine   bin: { jade: './bin/jade' },
+silly testEngine   man: [ './jade.1' ],
+silly testEngine   dependencies: { commander: '0.5.2', mkdirp: '0.3.0' },
+silly testEngine   devDependencies: 
+silly testEngine    { mocha: '*',
+silly testEngine      markdown: '*',
+silly testEngine      stylus: '*',
+silly testEngine      uubench: '*',
+silly testEngine      should: '*',
+silly testEngine      less: '*',
+silly testEngine      'uglify-js': '*' },
+silly testEngine   component: { scripts: { jade: 'runtime.js' } },
+silly testEngine   scripts: { prepublish: 'npm prune' },
+silly testEngine   engines: { node: '>= 0.1.98' },
+silly testEngine   _id: 'jade@0.26.1',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/node_modules/jade/package.json
+verbose loadDefaults jade@0.26.1
+silly testEngine { name: 'request',
+silly testEngine   description: 'Simplified HTTP request client.',
+silly testEngine   tags: [ 'http', 'simple', 'util', 'utility' ],
+silly testEngine   version: '2.9.202',
+silly testEngine   author: 
+silly testEngine    { name: 'Mikeal Rogers',
+silly testEngine      email: 'mikeal.rogers@gmail.com' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/mikeal/request.git' },
+silly testEngine   bugs: { url: 'http://github.com/mikeal/request/issues' },
+silly testEngine   engines: [ 'node >= 0.3.6', node: ' >= 0.3.6' ],
+silly testEngine   main: './main',
+silly testEngine   scripts: { test: 'node tests/run.js' },
+silly testEngine   _id: 'request@2.9.202',
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/node_modules/request/package.json
+verbose loadDefaults request@2.9.202
+silly testEngine { name: 'jsdom',
+silly testEngine   version: '0.2.14',
+silly testEngine   description: 'A javascript implementation of the W3C DOM',
+silly testEngine   keywords: [ 'dom', 'w3c', 'javascript' ],
+silly testEngine   maintainers: 
+silly testEngine    [ { name: 'Elijah Insua',
+silly testEngine        email: 'tmpvar@gmail.com',
+silly testEngine        url: 'http://tmpvar.com' } ],
+silly testEngine   contributors: 
+silly testEngine    [ { name: 'Vincent Greene',
+silly testEngine        email: 'ulteriorlife@gmail.com' },
+silly testEngine      { name: 'Dav Glass', email: 'davglass@gmail.com' },
+silly testEngine      { name: 'Felix Gnass', email: 'fgnass@gmail.com' },
+silly testEngine      { name: 'Charlie Robbins',
+silly testEngine        email: 'charlie.robbins@gmail.com' },
+silly testEngine      { name: 'Aria Stewart', email: 'aredridel@nbtsc.org' },
+silly testEngine      { name: 'Matthew',
+silly testEngine        email: 'N.A.',
+silly testEngine        url: 'http://github.com/matthewpflueger/' },
+silly testEngine      { name: 'Olivier El Mekki',
+silly testEngine        email: 'unknown',
+silly testEngine        url: 'http://blog.olivier-elmekki.com/' },
+silly testEngine      { name: 'Shimon Dookdin',
+silly testEngine        email: 'helpmepro1@gmail.com' },
+silly testEngine      { name: 'Daniel Cassidy',
+silly testEngine        email: 'mail@danielcassidy.me.uk',
+silly testEngine        url: 'http://www.danielcassidy.me.uk/' },
+silly testEngine      { name: 'Sam Ruby',
+silly testEngine        email: 'N/A',
+silly testEngine        url: 'http://intertwingly.net/blog/' },
+silly testEngine      { name: 'hij1nx', url: 'http://github.com/hij1nx' },
+silly testEngine      { name: 'Yonathan Randolph',
+silly testEngine        url: 'http://github.com/yonran' },
+silly testEngine      { name: 'Martin Davis',
+silly testEngine        url: 'http://github.com/waslogic' },
+silly testEngine      { name: 'Andreas Lind Petersen',
+silly testEngine        email: 'andreas@one.com' },
+silly testEngine      { name: 'd-ash', url: 'http://github.com/d-ash' },
+silly testEngine      { name: 'Robin Zhong', email: 'fbzhong@gmail.com' },
+silly testEngine      { name: 'Alexander Flatter',
+silly testEngine        email: 'flatter@gmail.com' },
+silly testEngine      { name: 'Heng Liu', email: 'liucougar@gmail.com' },
+silly testEngine      { name: 'Brian McDaniel',
+silly testEngine        url: 'http://github.com/brianmcd' },
+silly testEngine      { name: 'John Hurliman',
+silly testEngine        email: 'jhurliman@jhurliman.org' },
+silly testEngine      { name: 'Jimmy Mabey' },
+silly testEngine      { name: 'Gregory Tomlinson' },
+silly testEngine      { name: 'Jason Davies',
+silly testEngine        url: 'http://www.jasondavies.com/' },
+silly testEngine      { name: 'Josh Marshall',
+silly testEngine        url: 'http://www.ponderingtheobvious.com/' },
+silly testEngine      { name: 'Jason Priestley',
+silly testEngine        url: 'https://github.com/jhp' },
+silly testEngine      { name: 'Derek Lindahl',
+silly testEngine        url: 'https://github.com/dlindahl' },
+silly testEngine      { name: 'Chris Roebuck',
+silly testEngine        email: 'chris@quillu.com',
+silly testEngine        url: 'http://www.quillu.com' },
+silly testEngine      { name: 'Avi Deitcher',
+silly testEngine        url: 'https://github.com/deitch' },
+silly testEngine      { name: 'Nao Iizuka',
+silly testEngine        email: 'iizuka@kyu-mu.net',
+silly testEngine        url: 'https://github.com/iizukanao' },
+silly testEngine      { name: 'Peter Perenyi',
+silly testEngine        url: 'https://github.com/sinegar' } ],
+silly testEngine   bugs: 
+silly testEngine    { email: 'tmpvar@gmail.com',
+silly testEngine      url: 'http://github.com/tmpvar/jsdom/issues' },
+silly testEngine   licenses: 
+silly testEngine    [ { type: 'MIT',
+silly testEngine        url: 'http://github.com/tmpvar/jsdom/blob/master/LICENSE.txt' } ],
+silly testEngine   repositories: 
+silly testEngine    [ { type: 'git',
+silly testEngine        url: 'http://github.com/tmpvar/jsdom.git' } ],
+silly testEngine   implements: [ 'http://www.w3.org/TR/REC-DOM-Level-1' ],
+silly testEngine   dependencies: 
+silly testEngine    { htmlparser: '1.x',
+silly testEngine      request: '2.x',
+silly testEngine      cssom: '0.2.x',
+silly testEngine      contextify: '0.1.x' },
+silly testEngine   optionalDependencies: { contextify: '0.1.x' },
+silly testEngine   devDependencies: 
+silly testEngine    { nodeunit: '>=0.5.x',
+silly testEngine      'console.log': '*',
+silly testEngine      optimist: '*' },
+silly testEngine   engines: { node: '>=0.1.9' },
+silly testEngine   directories: { lib: './lib/jsdom' },
+silly testEngine   main: './lib/jsdom',
+silly testEngine   _id: 'jsdom@0.2.14',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/node_modules/jsdom/package.json
+verbose loadDefaults jsdom@0.2.14
+silly testEngine { name: 'csv',
+silly testEngine   version: '0.0.13',
+silly testEngine   description: 'CSV parser with simple api, full of options and tested against large datasets.',
+silly testEngine   author: { name: 'David Worms', email: 'david@adaltas.com' },
+silly testEngine   contributors: 
+silly testEngine    [ { name: 'David Worms', email: 'david@adaltas.com' },
+silly testEngine      { name: 'Will White',
+silly testEngine        email: 'https://github.com/willwhite' },
+silly testEngine      { name: 'Justin Latimer',
+silly testEngine        email: 'https://github.com/justinlatimer' } ],
+silly testEngine   engines: { node: '>= 0.1.90' },
+silly testEngine   keywords: [ 'parser', 'csv' ],
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/wdavidw/node-csv-parser.git' },
+silly testEngine   devDependencies: 
+silly testEngine    { 'coffee-script': 'latest',
+silly testEngine      mocha: 'latest',
+silly testEngine      should: 'latest' },
+silly testEngine   dependencies: {},
+silly testEngine   optionalDependencies: {},
+silly testEngine   scripts: { test: 'make test' },
+silly testEngine   homepage: 'https://github.com/wdavidw/node-csv-parser',
+silly testEngine   _id: 'csv@0.0.13',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/node_modules/csv/package.json
+verbose loadDefaults csv@0.0.13
+silly testEngine { author: 
+silly testEngine    { name: 'Matt Mueller',
+silly testEngine      email: 'mattmuelle@gmail.com',
+silly testEngine      url: 'mattmueller.me' },
+silly testEngine   name: 'cheerio',
+silly testEngine   description: 'Tiny, fast, and elegant implementation of core jQuery designed specifically for the server',
+silly testEngine   keywords: [ 'htmlparser', 'jquery', 'selector', 'scraper' ],
+silly testEngine   version: '0.7.0',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/MatthewMueller/cheerio.git' },
+silly testEngine   main: './index.js',
+silly testEngine   engines: { node: '>= 0.4.7' },
+silly testEngine   dependencies: 
+silly testEngine    { 'cheerio-soupselect': '*',
+silly testEngine      htmlparser2: '2.0.1 - 2.2.2',
+silly testEngine      underscore: '*' },
+silly testEngine   devDependencies: { mocha: '*', 'expect.js': '*', 'coffee-script': '*' },
+silly testEngine   scripts: { test: 'make test' },
+silly testEngine   _id: 'cheerio@0.7.0',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/node_modules/cheerio/package.json
+verbose loadDefaults cheerio@0.7.0
+silly testEngine { name: 'markdown',
+silly testEngine   version: '0.3.1',
+silly testEngine   description: 'A sensible Markdown parser for javascript',
+silly testEngine   keywords: [ 'markdown', 'text processing', 'ast' ],
+silly testEngine   maintainers: 
+silly testEngine    [ { name: 'Dominic Baggott',
+silly testEngine        email: 'dominic.baggott@gmail.com',
+silly testEngine        url: 'http://evilstreak.co.uk' },
+silly testEngine      { name: 'Ash Berlin',
+silly testEngine        email: 'ash_markdownjs@firemirror.com',
+silly testEngine        url: 'http://ashberlin.com' } ],
+silly testEngine   contributors: 
+silly testEngine    [ { name: 'Dominic Baggott',
+silly testEngine        email: 'dominic.baggott@gmail.com',
+silly testEngine        url: 'http://evilstreak.co.uk' },
+silly testEngine      { name: 'Ash Berlin',
+silly testEngine        email: 'ash_markdownjs@firemirror.com',
+silly testEngine        url: 'http://ashberlin.com' } ],
+silly testEngine   bugs: { url: 'http://github.com/evilstreak/markdown-js/issues' },
+silly testEngine   licenses: 
+silly testEngine    [ { type: 'MIT',
+silly testEngine        url: 'http://www.opensource.org/licenses/mit-license.php' } ],
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/evilstreak/markdown-js.git' },
+silly testEngine   main: './lib/index.js',
+silly testEngine   bin: { md2html: './bin/md2html.js' },
+silly testEngine   _id: 'markdown@0.3.1',
+silly testEngine   dependencies: {},
+silly testEngine   devDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.104',
+silly testEngine   _nodeVersion: 'v0.4.13-pre',
+silly testEngine   _defaultsLoaded: true }
+verbose caching /home/reed/Dropbox/projects/nhs-responsive/node_modules/markdown/package.json
+verbose loadDefaults markdown@0.3.1
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/package.json
+verbose into /home/reed/Dropbox/projects/nhs-responsive [ 'express@>=2.5.8',
+verbose into /home/reed/Dropbox/projects/nhs-responsive   'jade@>= 0.0.1',
+verbose into /home/reed/Dropbox/projects/nhs-responsive   'request@>=0.9.0',
+verbose into /home/reed/Dropbox/projects/nhs-responsive   'jquery@>=1.7.0',
+verbose into /home/reed/Dropbox/projects/nhs-responsive   'jsdom@>=0.2.0',
+verbose into /home/reed/Dropbox/projects/nhs-responsive   'markdown@>=0.3.0' ]
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/node_modules/jquery/package.json
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/node_modules/express/package.json
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/node_modules/jade/package.json
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/node_modules/request/package.json
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/node_modules/jsdom/package.json
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/node_modules/csv/package.json
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/node_modules/cheerio/package.json
+verbose from cache /home/reed/Dropbox/projects/nhs-responsive/node_modules/markdown/package.json
+verbose already installed in /home/reed/Dropbox/projects/nhs-responsive skipping express@>=2.5.8
+verbose already installed in /home/reed/Dropbox/projects/nhs-responsive skipping jade@>= 0.0.1
+verbose already installed in /home/reed/Dropbox/projects/nhs-responsive skipping request@>=0.9.0
+verbose cache add jquery@>=1.7.0
+verbose cache add [ 'jquery@>=1.7.0', null ]
+silly cache add: name, spec, args [ undefined,
+silly cache add: name, spec, args   'jquery@>=1.7.0',
+silly cache add: name, spec, args   [ 'jquery@>=1.7.0', null ] ]
+verbose parsed url { pathname: 'jquery@', href: 'jquery@' }
+silly cache add: name, spec, args [ 'jquery', '>=1.7.0', [ 'jquery', '>=1.7.0' ] ]
+verbose parsed url { pathname: '=1.7.0', href: '=1.7.0' }
+info addNamed [ 'jquery', '>=1.7.0' ]
+verbose addNamed [ null, '>=1.7.0' ]
+verbose already installed in /home/reed/Dropbox/projects/nhs-responsive skipping jsdom@>=0.2.0
+verbose already installed in /home/reed/Dropbox/projects/nhs-responsive skipping markdown@>=0.3.0
+verbose GET jquery
+verbose raw, before any munging jquery
+verbose url resolving [ 'https://registry.npmjs.org/', './jquery' ]
+verbose url resolved https://registry.npmjs.org/jquery
+verbose etag "2ORR2C2DPNQ9PQ0RE9AB8OUU0"
+silly get cb [ 200,
+silly get cb   { vary: 'Accept',
+silly get cb     server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     etag: '"A4US6S1USAFPLWI72VVO9P7UX"',
+silly get cb     date: 'Fri, 01 Jun 2012 17:15:30 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '5384' } ]
+ERR! Error: Not found: jquery@'>=1.7.0'
+ERR! Valid install targets:
+ERR! ["latest","1.5.1","1.6.2","1.6.3"]
+ERR!     at installTargetsError (/usr/local/lib/node_modules/npm/lib/cache.js:410:10)
+ERR!     at /usr/local/lib/node_modules/npm/lib/cache.js:403:17
+ERR!     at saved (/usr/local/lib/node_modules/npm/lib/utils/npm-registry-client/get.js:136:7)
+ERR!     at cb (/usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:36:9)
+ERR! Report this *entire* log at:
+ERR!     <http://github.com/isaacs/npm/issues>
+ERR! or email it to:
+ERR!     <npm-@googlegroups.com>
+ERR! 
+ERR! System Linux 3.0.0-19-generic
+ERR! command "node" "/usr/local/bin/npm" "install"
+ERR! cwd /home/reed/Dropbox/projects/nhs-responsive
+ERR! node -v v0.4.13-pre
+ERR! npm -v 1.0.104
+verbose exit [ 1, true ]
