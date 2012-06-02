@@ -6,13 +6,19 @@ link(rel='stylesheet', href='/stylesheets/results.css')
 h1 Doctors near #{location}
 
 ul
-
 	- each doctor in doctors
 		li.doctor
 			h2= doctor.name
-			.row= doctor.feedback
-			.row!= doctor.address
-			.row= doctor.GPs
-			.row= doctor.satisfaction
-			.row= doctor.extendedAppointments
-			.row= doctor.patients
+			.row.distance #{doctor.distance} #{doctor.distanceUnits} away
+			
+			- each phoneNumber in doctor.phoneNumbers
+				.row.phone
+					a(href="tel:#{phoneNumber}") #{phoneNumber}
+				
+			.row.feedback= doctor.feedback
+			.row.address!= doctor.address
+			.row.map
+				a(href="http://google.com/maps?q=#{doctor.addressString}") map
+			.row.gps= doctor.GPs
+			.row.sataisfaction= doctor.satisfaction
+			.row.appointments= doctor.extendedAppointments

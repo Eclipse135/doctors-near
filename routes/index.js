@@ -6,28 +6,20 @@ var  request = require('request'),
 	 csv = require('csv'),
 	 fs = require('fs');
 
-var postcodes = {}
+if(!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g,'');
+  };
+}
+
+var postcodes = {},
+	telRegex = /\+?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d?[ -]?\d?[ -]?\d/g,
+	metresPerMile = 1609;
 
 var getPostcodes = function(){
 
-	console.log('Getting postcodes... ');
-			
-	csv()
-	.fromPath(__dirname+'/../resources/postcodes.csv')
-	.on('data',function(data,index){
-
-		if(index === 0)
-			return;
-			
-		postcodes[data[0]] = {'easting':  Math.round(data[3]/100),
-							  'northing': Math.round(data[4]/100)};
-
-	})
-	.on('end',function(count){
-		console.log('Done getting postcodes, total: '+count);
-	})
-	.on('error',function(error){
-		console.log(error.message);
+	fs.readFile('resources/postcodeCoords.json', function (err, data) {
+		postcodes = JSON.parse(data);
 	});
 }
 
@@ -96,7 +88,7 @@ exports.restResults = function(req, res){
 
 	var getDoctors = function(easting, northing){
 
-		console.log("Getting doctors: ", Date.now() - start);
+		console.log("Getting doctors for: " + easting + ", " + northing, Date.now() - start);
 
 		url = "http://www.nhs.uk/Scorecard/Pages/Results.aspx?OrgType=1&TreatmentID=0&PageNumber=1&PageSize=0&TabId=31&SortType=1&LookupType=1&LocationType=1&SearchTerm=n44eb&DistanceFrom=5&SortByMetric=0&TrustCode=&TrustName=&DisambiguatedSearchTerm=&LookupTypeWasSwitched=False&MatchedOrganisationPostcode=&MatchedOrganisationCoords=&ServiceIDs=&ScorecardTypeCode=&NoneEnglishCountry=&HasMultipleNames=False&OriginalLookupType=1&ServiceLaunchFrom=&Filters=&TopLevelFilters=";
 		url += "&Coords="+northing +"%2c" + easting;
@@ -141,9 +133,39 @@ exports.restResults = function(req, res){
 			console.log("Done scraping: ", Date.now() - start);
 
 			for(var i = 0; i<names.length; i++){
+			
+				var addressText = $(addresses[i]).text();
+				
+				console.log(addressText);
+				
+				var phoneNumbers = telRegex.exec(addressText);
+				
+				console.log(JSON.stringify(phoneNumbers));
+				
+				var addressString = addressText.substring(0, phoneNumbers.index).trim(),
+					address = addressString.replace(/\n+/g,"<br/>"),
+					addressString = addressString.replace(/\n+/g,""),
+					distance = Number(addressText.substring(telRegex.lastIndex).replace(" miles away", "")),
+					distanceUnits = "mile";
+					
+				if(distance<0.5){
+					distance = Math.round(distance*metresPerMile);
+					distanceUnits = "metre"
+				}
+				
+				if(distance!=1){
+					distanceUnits += "s";
+				}
+				
+				telRegex.lastIndex = 0;
+			
 				doctors.push({
 					"name": $(names[i]).text(),
-					"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/(\+?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d?[ -]?\d?[ -]?\d)/g,"<a href=\"tel:$1\">$1</a>"),
+					"phoneNumbers": phoneNumbers,
+					"distance": distance,
+					"distanceUnits": distanceUnits,
+					"address": address,
+					"addressString": addressString,
 					"GPs": $(GPs[i]).text().replace(/Data not available/, ""),
 					"feedback": $(feedbacks[i]).text().replace(/Read\/add comments about this practice/, ""),
 					"satisfaction": $(satisfactions[i]).text(),
@@ -156,57 +178,6 @@ exports.restResults = function(req, res){
 
 			res.render('results', {'location':postcode, 'doctors':doctors});
 					
-			/*
-			jsdom.env({
-				html: body,
-				src: [jquery],
-				done: function(err, window) {
-				
-					console.log("Doc loaded", Date.now() - start);
-					
-					var $ = window.jQuery;
-	
-					var $table = $('#ctl00_PlaceHolderMain_MainContent_ctl00_comparisonView').parent();
-				
-					console.log("Got table", Date.now() - start);
-	
-					var names = $table.find('td[headers*="gporganisationheader-0"]');
-					console.log("Got names", Date.now() - start);
-					var addresses = $table.find('td[headers*="gpcoreaddress-1"]');
-					console.log("Got adddresses", Date.now() - start);
-					var GPs = $table.find('td.standard[headers*="gpgenderlanguage-6"]');
-					console.log("Got GPs", Date.now() - start);
-					var feedbacks = $table.find('td.standard[headers*="gppatientfeedbackrecommend-8"]');
-					console.log("Got feedback", Date.now() - start);
-					var satisfactions = $table.find('td.standard[headers*="satisfcationoverallcare-10"]');
-					console.log("Got satisfaction", Date.now() - start);
-					var extendedAppointments = $table.find('td.standard[headers*="gpextendedappointments-15"]');
-					console.log("Got appointments", Date.now() - start);
-					var patients = $table.find('td.standard[headers*="gp-registered-list-size-37"]');
-					console.log("Got patients", Date.now() - start);
-			
-					var doctors = [];
-				
-					console.log("Done scraping: ", Date.now() - start);
-	
-					for(var i = 0; i<names.length; i++){
-						doctors.push({
-							"name": $(names[i]).text(),
-							"address": $.trim($(addresses[i]).text()).replace(/\n/g,"<br/>").replace(/(\+?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d?[ -]?\d?[ -]?\d)/g,"<a href=\"tel:$1\">$1</a>"),
-							"GPs": $(GPs[i]).text().replace(/Data not available/, ""),
-							"feedback": $(feedbacks[i]).text().replace(/Read\/add comments about this practice/, ""),
-							"satisfaction": $(satisfactions[i]).text(),
-							"extendedAppointments": $(extendedAppointments[i]).text(),
-							"patients": $(patients[i]).text()
-						});
-					}
-					window.close();
-				
-					console.log("Done with controller: ", Date.now() - start);
-	
-					res.render('results', {'location':postcode, 'doctors':doctors});
-				}
-			})*/
 		});
 	};
 
@@ -224,12 +195,10 @@ exports.restResults = function(req, res){
 	}
 	
 	var postcode = postcode.replace(/\-+/g," ");
-	
-	console.log(postcode);
-	
+		
 	if (postcodes[postcode]){
 	
-		console.log("got postcode in cache");
+		console.log("got postcode in cache: " + postcode);
 	
 		var northing = postcodes[postcode].northing,
 			easting = postcodes[postcode].easting;
@@ -238,7 +207,7 @@ exports.restResults = function(req, res){
 		
 	} else {
 	
-		console.log("getting postcode co-ords...");
+		console.log("getting postcode co-ords: " + postcode);
 		
 		var	url = "http://mapit.mysociety.org/postcode/"+ postcode.replace(/\s+/g,"");
 	

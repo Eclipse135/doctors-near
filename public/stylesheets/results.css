@@ -16,6 +16,22 @@ ul,li{
 	box-shadow: 2px 2px 2px #CCC;
 }
 
+.doctor .row{
+	padding: 4px 0;
+}
+
+.doctor .distance{
+	color: #999;
+}
+
+.doctor .phone a{
+	display: inline-block;
+	padding: 4px 10px;
+	background: #00F;
+	color: #FFF;
+	border-radius: 6px;
+}
+
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
 
 	body{
