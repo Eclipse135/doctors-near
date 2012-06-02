@@ -40,7 +40,7 @@ var getPostcodes = function(){
 	});
 }
 
-getPostcodes();
+//getPostcodes();
 
 
 // Routes
