@@ -24,12 +24,12 @@ ul,li{
 	color: #999;
 }
 
-.doctor .phone a{
+.doctor .actions a{
 	display: inline-block;
 	padding: 4px 10px;
 	background: #00F;
 	color: #FFF;
-	border-radius: 6px;
+	margin: 0 6px 0 0;
 }
 
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {

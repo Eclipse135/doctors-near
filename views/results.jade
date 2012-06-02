@@ -11,14 +11,13 @@ ul
 			h2= doctor.name
 			.row.distance #{doctor.distance} #{doctor.distanceUnits} away
 			
-			- each phoneNumber in doctor.phoneNumbers
-				.row.phone
+			.row.actions
+				- each phoneNumber in doctor.phoneNumbers
 					a(href="tel:#{phoneNumber}") #{phoneNumber}
+				a(href="http://maps.google.com/maps?q=#{doctor.addressString}") map
 				
 			.row.feedback= doctor.feedback
 			.row.address!= doctor.address
-			.row.map
-				a(href="http://google.com/maps?q=#{doctor.addressString}") map
 			.row.gps= doctor.GPs
 			.row.sataisfaction= doctor.satisfaction
 			.row.appointments= doctor.extendedAppointments
