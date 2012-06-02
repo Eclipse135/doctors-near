@@ -4,7 +4,9 @@
  */
 
 var express = require('express')
-  , routes = require('./routes');
+  , routes = require('./routes')
+  , fs = require('fs')
+  , csv = require('csv');
 
 var app = express.createServer();
 
@@ -28,6 +30,18 @@ app.configure('development', function(){
 app.configure('production', function(){
   app.use(express.errorHandler());
 });
+
+postcodes = {};
+
+var getPostcodes = function(){
+
+	fs.readFile('resources/postcodeCoords.json', function (err, data) {
+		postcodes = JSON.parse(data);
+	});
+}
+
+getPostcodes();
+
 
 // Routes
 

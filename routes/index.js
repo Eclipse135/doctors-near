@@ -3,7 +3,6 @@ var  request = require('request'),
 	 $ = require('../lib/jquery'),
 	 jsdom = require('jsdom'),
 	 util = require('util'),
-	 csv = require('csv'),
 	 fs = require('fs');
 
 if(!String.prototype.trim) {
@@ -12,18 +11,8 @@ if(!String.prototype.trim) {
   };
 }
 
-var postcodes = {},
-	telRegex = /\+?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d?[ -]?\d?[ -]?\d/g,
+var telRegex = /\+?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d[ -]?\d?[ -]?\d?[ -]?\d/g,
 	metresPerMile = 1609;
-
-var getPostcodes = function(){
-
-	fs.readFile('resources/postcodeCoords.json', function (err, data) {
-		postcodes = JSON.parse(data);
-	});
-}
-
-//getPostcodes();
 
 exports.home = function(req, res){
 
