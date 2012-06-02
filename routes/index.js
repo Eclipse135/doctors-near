@@ -23,7 +23,7 @@ var getPostcodes = function(){
 	});
 }
 
-getPostcodes();
+//getPostcodes();
 
 exports.home = function(req, res){
 
@@ -142,11 +142,23 @@ exports.restResults = function(req, res){
 				
 				console.log(JSON.stringify(phoneNumbers));
 				
-				var addressString = addressText.substring(0, phoneNumbers.index).trim(),
-					address = addressString.replace(/\n+/g,"<br/>"),
-					addressString = addressString.replace(/\n+/g,""),
-					distance = Number(addressText.substring(telRegex.lastIndex).replace(" miles away", "")),
-					distanceUnits = "mile";
+				if(phoneNumbers && phoneNumbers.length){
+				
+					var addressString = addressText.substring(0, phoneNumbers.index).trim(),
+						address = addressString.replace(/\n+/g,"<br/>"),
+						addressString = addressString.replace(/\n+/g,""),
+						distance = Number(addressText.substring(telRegex.lastIndex).replace(" miles away", "")),
+						distanceUnits = "mile";
+				} else {
+				
+					phoneNumbers = [];
+					
+					var addressString = addressText.trim(),
+						address = addressString.replace(/\n+/g,"<br/>"),
+						addressString = addressString.replace(/\n+/g,""),
+						distance = 0,
+						distanceUnits = "mile";
+				}
 					
 				if(distance<0.5){
 					distance = Math.round(distance*metresPerMile);
