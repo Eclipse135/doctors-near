@@ -43,7 +43,6 @@ exports.geolocationToPostcode = function(req, res){
 		res.json({'postcode':postcode});
 	})
 	
-
 };
 
 exports.search = function(req, res){
