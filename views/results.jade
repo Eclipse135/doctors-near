@@ -13,8 +13,8 @@ ul
 			
 			.row.actions
 				- each phoneNumber in doctor.phoneNumbers
-					a(href="tel:#{phoneNumber}") #{phoneNumber}
-				a(href="http://maps.google.com/maps?q=#{doctor.addressString}") map
+					a.tel(href="tel:#{phoneNumber}") #{phoneNumber}
+				a.map(href="http://maps.google.com/maps?q=#{doctor.addressString}") map
 				
 			.row.feedback= doctor.feedback
 			.row.address!= doctor.address

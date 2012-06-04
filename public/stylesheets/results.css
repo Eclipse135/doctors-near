@@ -7,13 +7,19 @@ ul,li{
 	}
 
 .doctor{
-	max-width: 280px;
+	color: #333;
+	width: 430px;
+	min-height: 280px;
 	display:inline-block;
 	vertical-align: top;
-	margin: 20px;
-	padding: 0 20px 20px 20px;
+	margin: 0 20px 20px 0;
+	padding: 20px;
 	border: 1px solid #CCC;
 	box-shadow: 2px 2px 2px #CCC;
+}
+
+.doctor h2{
+	margin: 0 0 4px 0;
 }
 
 .doctor .row{
@@ -26,12 +32,28 @@ ul,li{
 
 .doctor .actions a{
 	display: inline-block;
+	margin-right: 10px;
+	border-bottom: 1px dotted #03C;
+}
+
+.doctor .actions a.map{
+	color: #0C3;
+	border-bottom: 1px dotted #0C3;
+}
+
+/*
+.doctor .actions a{
+	display: inline-block;
 	padding: 4px 10px;
-	background: #00F;
+	background: #06C;
 	color: #FFF;
 	margin: 0 6px 0 0;
 }
 
+.doctor .actions a.map{
+	background: #0C6;
+}
+*/
 @media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
 
 	body{
@@ -46,11 +68,14 @@ ul,li{
 	.doctor{
 		margin: 0;
 		max-width: none;
+		min-height: 0;
 		box-shadow: none;
 		display:block;
-		padding: 5px 20px 20px 20px;
 		border: none;
 		border-top: 1px solid #ccc;
+	}
+	.doctor h2{
+		min-height: 0;
 	}
 
 }

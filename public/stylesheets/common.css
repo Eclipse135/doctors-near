@@ -1,6 +1,11 @@
 body {
   padding: 20px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Helvetica, Arial, sans-serif;
+}
+
+#main{
+	max-width: 980px;
+	margin: auto;
 }
 
 a {
@@ -10,6 +15,11 @@ a {
 
 a:hover{
   text-decoration: underline;
+}
+
+h2, h3{
+	font-family: "Radley", sans-serif;
+	font-weight: normal;
 }
 
 h1{
